@@ -7,7 +7,7 @@ const useRouter = require('./router/userRouter')
 
 const app = express()
 
-
+app.set("trust proxy", true);
 app.set('port', 3000);
 // Create a server object
 const server = http.createServer(app)
