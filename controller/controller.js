@@ -3,12 +3,10 @@ var satelize = require('satelize');
 
 
 const getInfo = async (req, res)=>{
-    const ipInfo= req.ipInfo
 
-    await satelize.satelize({ip: ipInfo}, function(err, payload) {
+    await satelize.satelize({ip: req.ip}, function(err, payload) {
 
-        // console.log(payload);
-        // console.log(ipInfo);
+        console.log(payload);
          res.json({'payload': payload})
       });
 
