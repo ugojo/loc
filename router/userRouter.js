@@ -11,7 +11,7 @@ router.get('/',(req, res)=>{
 
     res.status(200).json({'client_ip': ipInfo.ip, 
               'location': ipInfo.Country,
-              'greeting': `Hello, ${name}!,the temperature is 11 degrees celcius in ${ip.country}`
+              'greeting': `Hello, ${name.name}!,the temperature is 11 degrees celcius in ${ip.country}`
      })
 
     // console.log({'IP' : ipInfo});
