@@ -17,12 +17,8 @@ const port = 3000;
 
 app.use(express.json())
 app.use(expressIp().getIpInfoMiddleware)
-app.get('/',(request, response, next) => {
-	console.log({'request': request.method});
 
-	next()
- });
- app.use(useRouter)
+ app.use('/api/hello/',useRouter)
 
 // Start the server
 server.listen(port, () => {

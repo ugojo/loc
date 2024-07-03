@@ -12,6 +12,7 @@
     "express": "^4.19.2",
     "express-ip": "^1.0.4",
     "http": "^0.0.1-security",
-    "ip": "^2.0.1"
+    "ip": "^2.0.1",
+    "satelize": "^0.2.0"
   }
 }
