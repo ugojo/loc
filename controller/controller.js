@@ -22,7 +22,7 @@ async function getInfo(req, res) {
                   "greeting":  `Hello,${visitor}!, the temperature is ${temp} degrees celcius in ${region}`
         })
 
-        console.log(userIp.data, currency, region);
+        // console.log(userIp.data, currency, region);
     } catch (error) {
         console.log(error);
     }
