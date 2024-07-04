@@ -17,17 +17,17 @@ const getInfo = async(req, res)=> {
         // const ip = await axios.get('https://api.ipify.org?format=json')
         const userIp = await axios.get(`http://ipinfo.io/${clientIp}/json?token=${process.env.TOKEN}`)
         const {ip, country, region} = userIp.data
-        // const [latitude, longitude] = userIp.data.loc.split(',')
+        const [latitude, longitude] = userIp.data.loc.split(',')
 
-        // const temps = await axios.get(`http://api.openweathermap.org/data/2.5/weather?` 
-		// 	+`lat=${latitude}&lon=${longitude}&appid=${process.env.API_KEY}`)
+        const temps = await axios.get(`http://api.openweathermap.org/data/2.5/weather?` 
+			+`lat=${latitude}&lon=${longitude}&appid=${process.env.API_KEY}`)
         
-        // const temp = temps.data.main.temp
+        const temp = temps.data.main.temp
 
         res.status(200).json({"client_ip": clientIp,
                   "location": region ,
                   "Cont": country,
-                //   "greeting":  `Hello,${visitor}!, the temperature is ${temp} degrees celcius in ${region}`
+                  "greeting":  `Hello,${visitor}!, the temperature is ${temp} degrees celcius in ${region}`
         })
 
         // console.log(userIp.data, region);
