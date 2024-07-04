@@ -1,15 +1,21 @@
 const axios = require('axios');
+const ip = require('ip')
 
 
 const URL="https://ipapi.co/json/"
 
-async function getInfo(req, res) {
+const getInfo = async(req, res)=> {
     visitor = req.query.visitor_name
 
-    try {
-        const userIp = await axios.get(process.env.URL);
+    // const ipInfo = req.ipInfo
 
-        const {ip, country, region, latitude, longitude} = userIp.data
+    // const ips = req.headers['x-forwarded-for'] || req.socket.remoteAddress
+
+    try {
+        // const ip = await axios.get('https://api.ipify.org?format=json')
+        const userIp = await axios.get(`http://ipinfo.io/json?token=${process.env.TOKEN}`)
+        const {ip, country, region} = userIp.data
+        const [latitude, longitude] = userIp.data.loc.split(',')
 
         const temps = await axios.get(`http://api.openweathermap.org/data/2.5/weather?` 
 			+`lat=${latitude}&lon=${longitude}&appid=${process.env.API_KEY}`)
@@ -24,7 +30,7 @@ async function getInfo(req, res) {
 
         // console.log(userIp.data, region);
     } catch (error) {
-       return res.status(400).json({'error': error})
+       return res.status(400).json({'error': error.message})
     }
 }
 
