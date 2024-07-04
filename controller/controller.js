@@ -1,29 +1,31 @@
-const axios = require('axios')
+const axios = require('axios');
+
+
 // const ip = require('ip')
+const URL="https://ipapi.co/json/"
 
-const url = 'https://ipapi.co/json/'
-
-const getInfo = async (req, res)=>{
-
+async function getInfo(req, res) {
     visitor = req.query.visitor_name
 
-    await axios 
-     .get(url)
-    .then((response)=>{
-       const data = response.data
+    try {
+        const userIp = await axios.get(URL);
 
-       console.log(response.data);
+        const {ip, currency, region, latitude, longitude} = userIp.data
 
-        res.status(200).json({"client_ip": data.ip,
-                              "location": data.country_name,
-                              "greeting": "Hello," + visitor + "! the temperature is 11 degees Celcius in " + data.country_name
+        const temps = await axios.get(`http://api.openweathermap.org/data/2.5/weather?` 
+			+`lat=${latitude}&lon=${longitude}&appid=${process.env.API_KEY}`)
+        
+        const temp = temps.data.main.temp
+
+        res.json({"client_ip": ip,
+                  "location": region,
+                  "greeting":  `Hello,${visitor}!, the temperature is ${temp} degrees celcius in ${region}`
         })
-    })
-    .catch(err=>{
-        console.log({'error': err});
-    })
 
+        console.log(userIp.data, currency, region);
+    } catch (error) {
+        console.log(error);
+    }
 }
-
 
 module.exports = getInfo

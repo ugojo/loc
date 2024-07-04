@@ -1,4 +1,5 @@
 const express = require('express')
+ require('dotenv').config()
 const expressIp = require('express-ip')
 const  http = require('http');
 const useRouter = require('./router/userRouter')
