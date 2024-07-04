@@ -26,7 +26,6 @@ const getInfo = async(req, res)=> {
 
         res.status(200).json({"client_ip": clientIp,
                   "location": region ,
-                  "Cont": country,
                   "greeting":  `Hello,${visitor}!, the temperature is ${temp} degrees celcius in ${region}`
         })
 
