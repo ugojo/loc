@@ -1,8 +1,8 @@
 const axios = require('axios');
-const ip = require('ip')
 
 
-const URL="https://ipapi.co/json/"
+
+
 
 const getInfo = async(req, res)=> {
     visitor = req.query.visitor_name
@@ -16,7 +16,7 @@ const getInfo = async(req, res)=> {
     try {
         // const ip = await axios.get('https://api.ipify.org?format=json')
         const userIp = await axios.get(`http://ipinfo.io/${clientIp}/json?token=${process.env.TOKEN}`)
-        const {ip, country, region} = userIp.data
+        const {country, region} = userIp.data
         const [latitude, longitude] = userIp.data.loc.split(',')
 
         const temps = await axios.get(`http://api.openweathermap.org/data/2.5/weather?` 
